@@ -1,0 +1,41 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# css
+/src/assets/css/tailwind.output.css
+
+
+# node_modules: là thư mục chứa các dependencies của project. Bỏ qua để không phải commit các dependencies lên Git.
+# /.pnp: bỏ qua thư mục .pnp, một công cụ được sử dụng bởi Yarn để giúp quản lý dependencies.
+# .pnp.js: bỏ qua file .pnp.js, một file được tạo bởi Yarn khi sử dụng .pnp.
+# /coverage: bỏ qua thư mục chứa báo cáo về code coverage được tạo ra bởi các công cụ kiểm thử tự động.
+# /build: bỏ qua thư mục chứa mã nguồn được biên dịch thành các file tĩnh để triển khai ở môi trường production.
+# .DS_Store: bỏ qua các file metadata được tạo ra bởi hệ điều hành macOS.
+# .env.local, .env.development.local, .env.test.local, .env.production.local: bỏ qua các file cấu hình môi trường được sử dụng để chạy ứng dụng.
+# .env: bỏ qua file cấu hình môi trường chung cho toàn bộ ứng dụng.
+# npm-debug.log*: bỏ qua các file log được tạo ra bởi npm khi gặp lỗi.
+# yarn-debug.log*: bỏ qua các file log được tạo ra bởi Yarn khi gặp lỗi.
+# yarn-error.log*: bỏ qua các file log chứa thông tin về lỗi được tạo ra bởi Yarn.
+# /src/assets/css/tailwind.output.css: bỏ qua file CSS được tạo ra bởi Tailwind CSS.

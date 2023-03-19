@@ -1,0 +1,108 @@
+/* @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
+  background-color: #dff9fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
+ .containerItemKhoaHoc h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.containerItemKhoaHoc p {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.pricing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+ .containerItemKhoaHoc .pricing .plan {
+  /* background-color: #fff; */
+  padding: 2.5rem;
+  margin: 12px;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+ .containerItemKhoaHoc .pricing .plan h2 {
+  font-size: 12px;
+  margin-bottom: 12px;
+  width: 100px;
+  display: inline;
+}
+.containerItemKhoaHoc .pricing .plan .price {
+  margin-bottom: 1rem;
+  font-size: 30px;
+  margin-left: 35px;
+}
+.containerItemKhoaHoc .pricing .plan ul.features {
+  list-style-type: none;
+  text-align: left;
+}
+.containerItemKhoaHoc .pricing .plan ul.features li {
+  margin: 8px;
+ 
+}
+.containerItemKhoaHoc .pricing .plan ul.features li .fas {
+  margin-right: 4px;
+}
+.containerItemKhoaHoc .pricing .plan ul.features li .fa-check-circle {
+  color: #6ab04c;
+}
+.containerItemKhoaHoc .pricing .plan ul.features li .fa-times-circle {
+  color: #eb4d4b;
+}
+.containerItemKhoaHoc .pricing .plan button {
+  border: none;
+  padding: 2px 35px;
+  margin-top: 1rem;
+  background-color: #6ab04c;
+  /* color: #fff; */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.containerItemKhoaHoc .pricing .plan.popular {
+  border: 2px solid #6ab04c;
+  position: relative;
+  transform: scale(1.08);
+  margin-top: 80px;
+}
+.containerItemKhoaHoc .pricing .plan.popular span {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #6ab04c;
+  /* color: #fff; */
+  padding: 4px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+
+}
+.containerItemKhoaHoc .pricing .plan:hover {
+  box-shadow: 5px 7px 67px -28px rgba(0, 0, 0, 0.37);
+}
+
+.containerItemKhoaHoc h2 img {
+    /* margin-left: 35px; */
+}
+.containerItemKhoaHoc{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
