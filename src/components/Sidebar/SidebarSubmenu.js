@@ -5,6 +5,7 @@ import { DropdownIcon } from '../../icons'
 import * as Icons from '../../icons'
 import { Transition } from '@windmill/react-ui'
 import { actionFetchUsers } from '../../redux/actions/listCLBAction';
+// import { fetchListPT } from '../../redux/actions/listPTAction';
 
 function Icon({ icon, ...props }) {
   const Icon = Icons[icon]
@@ -19,6 +20,12 @@ useEffect(() => {
   dispatch(actionFetchUsers);
 
 }, [dispatch]);
+
+// useEffect(() => {
+//   dispatch(fetchListPT);
+
+// }, [dispatch]);
+
   const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false)
 
   function handleDropdownMenuClick() {

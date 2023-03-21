@@ -7,6 +7,9 @@ import thunk from "redux-thunk";
 
 import listCLBReducer from "./listCLBReducer";
 import formCLBReducer from "./formCLBReducer";
+import listPTReducer from "./listPTReducer"
+import listHOCVIENReducer from "./listHocVienReducer"
+import listTINTUCReducer from "./listTinTucReducer"
 // export { rootReducer };
 // ES6 object literal
 export const rootReducer = combineReducers({
@@ -15,6 +18,9 @@ export const rootReducer = combineReducers({
 //   user: userReducer,
   listCLBGYM: listCLBReducer,
   formCLBGYM: formCLBReducer,
+  listPTGYM: listPTReducer,
+  listHOCVIENGYM: listHOCVIENReducer,
+  listTINTUCGYM: listTINTUCReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

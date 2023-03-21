@@ -1,0 +1,5 @@
+// Định nghĩa các action types
+
+export const UPDATE_GYM_PT_LIST_PENDING = "pt/UPDATE_GYM_PT_LIST_PENDING";
+export const EDIT_GYM_PT_LIST_PENDING = "pt/EDIT_GYM_PT_LIST_PENDING";
+export const DELETE_GYM_PT_LIST_PENDING = "pt/DELETE_GYM_PT_LIST_PENDING ";

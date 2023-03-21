@@ -21,6 +21,7 @@ const Modals = lazy(() => import('../pages/Modals'))
 const Tables = lazy(() => import('../pages/Tables'))
 const Page404 = lazy(() => import('../pages/404'))
 const Blank = lazy(() => import('../pages/Blank'))
+const DetailsTinTuc = lazy(() => import('../pages/DetailsTinTuc'))
 
 /**
  * ⚠ These are internal routes!
@@ -106,9 +107,12 @@ const routes = [
     path: '/listHoaDon',
     component: ListHoaDon,
   },
+  {
+    path: '/detailstintuc',
+    component: DetailsTinTuc,
+  },
  
     // LIST GYM
-
 
   {
     path: '/404',
