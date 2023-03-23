@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 
 import PageTitle from '../components/Typography/PageTitle'
 import SectionTitle from '../components/Typography/SectionTitle'
@@ -22,7 +22,8 @@ import response from '../utils/demo/tableData'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionFetchTinTucs, getItemFromNextPageAfterDeleteTinTuc } from '../redux/actions/listTinTucAction'
 import { UPDATE_GYM_TINTUC_LIST_PENDING } from '../redux/constants/listTinTucconstans'
-import { useHistory } from "react-router-dom";
+import { useHistory, Route, Switch, NavLink } from "react-router-dom";
+import DetailsTinTuc from '../pages/DetailsTinTuc'
 
 // make a copy of the data, for the second table
 const response2 = response.concat([])
@@ -33,22 +34,21 @@ function ListTinTuc() {
 
   // const response2 = list__TINTUC.concat([])
   const dispatch = useDispatch();
- // const list__TINTUC = useSelector(state => state.users);
   useEffect(() => {
     dispatch((actionFetchTinTucs));
   }, [dispatch]);
-  const response2 = list__TINTUC.concat([])
-
-
-
+  // const response2 = list__TINTUC.concat([])
+  const response2 = [...list__TINTUC];//  tạo một bản sao của mảng list__TINTUC
+  
+  // history để truyền dữ liệu qua 1 component khác, và useparams bên component đó sẽ hứng nó
   const history = useHistory();
   //Tạo một state mới để lưu ID của tin tức được chọn để chỉnh sửa
   const [selectedId, setSelectedId] = useState(null)
 
   //lưu ID của tin tức được chọn vào state selectedId và chuyển sang trang DetailsTinTuc
-  const handleEdit = (id) => {
-    setSelectedId(id)
-    history.push(`/detailstintuc/${id}`)
+  const handleEdit = (_id) => {
+    setSelectedId(_id);
+    history.push(`/detailstintuc/${_id}`);
   }
   /**
    * DISCLAIMER: This code could be badly improved, but for the sake of the example
@@ -70,7 +70,7 @@ function ListTinTuc() {
   const resultsPerPage = 3
   const totalResults = list__TINTUC.length
 
- const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     // call API here
@@ -87,7 +87,7 @@ function ListTinTuc() {
     setPageTable2(p)
     setCurrentPage(p.selected + 1);
   }
- 
+
 
   // on page change, load new sliced data
   // here you would make another server request for new data
@@ -101,7 +101,7 @@ function ListTinTuc() {
     setDataTable2(response2.slice((pageTable2 - 1) * resultsPerPage, pageTable2 * resultsPerPage))
   }, [pageTable2])
 
-    const handleDeletee = async (id) => {
+  const handleDeletee = async (id) => {
     try {
       // xóa item từ API
       await axios.delete(
@@ -110,7 +110,7 @@ function ListTinTuc() {
       const newList = dataTable1.filter((item) => item.id !== id);
       setDataTable1(newList);
       // lưu mới list__CLB state
-     // và thay đổi, re-render
+      // và thay đổi, re-render
       const response2 = await axios.get(
         `http://localhost:3002/api/tintucs`);
       dispatch({ type: UPDATE_GYM_TINTUC_LIST_PENDING, payload: response2.data });
@@ -145,7 +145,7 @@ function ListTinTuc() {
                     {/* <Avatar className="hidden mr-3 md:block" src={user.avatar} alt="User avatar" /> */}
                     <div>
                       <p className="font-semibold">{News.TenChuDe}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400"id={News._id}>{News.TheLoaiTinTuc}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400" id={News._id}>{News.TheLoaiTinTuc}</p>
                     </div>
                   </div>
                 </TableCell>
@@ -153,24 +153,30 @@ function ListTinTuc() {
                   <span className="text-sm"> {News.TheLoaiTinTuc}</span>
                 </TableCell> */}
                 <TableCell>
-                <img className=' w-40 mr-3' src={News.ImageTinTuc} alt="" />
+                  <img className=' w-40 mr-3' src={News.ImageTinTuc} alt="" />
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{News.NoiDungTinTuc.length > 50 ? News.NoiDungTinTuc.slice(0, 50)+'...' : News.NoiDungTinTuc}
+                  <span className="text-sm">{News.NoiDungTinTuc.length > 50 ? News.NoiDungTinTuc.slice(0, 50) + '...' : News.NoiDungTinTuc}
                   </span>
                 </TableCell>
                 <TableCell>
-                <Button layout="link" size="icon" aria-label="Edit"
+                  <Button layout="link" size="icon" aria-label="Edit"
                 onClick={() => handleEdit(News._id)}
                 >
                       <EditIcon className="w-5 h-5" aria-hidden="true" />
-                      chỉnh sửa
+                      Edit
                     </Button>
-                    <Button layout="link" size="icon" aria-label="Delete  "
+                  {/* <NavLink to={`/detailstintuc/${News._id}`}>
+                    <Button size="small" tag="a">
+                      <EditIcon className="w-5 h-5" aria-hidden="true" />
+                      <span>Edit</span>
+                    </Button>
+                  </NavLink> */}
+                  <Button layout="link" size="icon" aria-label="Delete  "
                     onClick={() => handleDeletee(News._id)}
-                    >
-                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
-                    </Button>
+                  >
+                    <TrashIcon className="w-5 h-5" aria-hidden="true" />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -184,7 +190,7 @@ function ListTinTuc() {
             label="Table navigation"
           />
         </TableFooter>
-      </TableContainer>  
+      </TableContainer>
     </>
   )
 }

@@ -9,12 +9,14 @@ const homeUsers = lazy(() => import('./pages/Users/Home'))
 const CreateAccount = lazy(() => import('./pages/CreateAccount'))
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
 
+const DetailsTinTuc = lazy(() => import('./pages/DetailsTinTuc'))
 function App() {
   return (
     <>
       <Router>
         <AccessibleNavigationAnnouncer />
         <Switch>
+        <Route exact path="/detailstintuc/:id" component={DetailsTinTuc} />
           <Route path="/home" component={homeUsers} />
           {/* <Route path="/listHocVien" component={Login1} /> */}
           <Route path="/create-account" component={CreateAccount} />

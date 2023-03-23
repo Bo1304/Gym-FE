@@ -20,10 +20,22 @@ import {
 import { EditIcon, TrashIcon } from '../icons'
 
 import response from '../utils/demo/tableData'
+import { useDispatch, useSelector } from 'react-redux'
+import { actionFetchKhoaTaps } from '../redux/actions/listKhoaTapAction'
 // make a copy of the data, for the second table
 const response2 = response.concat([])
 
 function ListHoaDon() {
+
+
+  const list__KhoaTap = useSelector((state) => state.listKHOATAPGYM.list__KhoaTap);
+  console.log(list__KhoaTap);
+
+  // fetch dữ liệu từ action này sử dụng hook useDispatch để gửi action tới reducer
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch((actionFetchKhoaTaps));
+  }, [dispatch]);
   /**
    * DISCLAIMER: This code could be badly improved, but for the sake of the example
    * and readability, all the logic for both table are here.
@@ -74,103 +86,35 @@ function ListHoaDon() {
 
       <SectionTitle>Simple table</SectionTitle>
       <TableContainer className="mb-8">
+
         <div className="containerItemKhoaHoc gap-4">
-          <div class="pricing">
-            <div class="plan popular">
-              <span><SectionTitle>Tên khóa tập</SectionTitle></span>
-              <SectionTitle><img src="https://www.citigym.com.vn/storage/uploads/rin-1822-375x440.jpg" /></SectionTitle>
-              <div class="price"><SectionTitle><h1
-                style={{
-                  fontSize: 20,
-                  marginRight: 50,
-                  
-                }}
-              >$10</h1></SectionTitle></div>
-              <ul class="features">
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>2 tháng</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>8:00 - 10:00</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>PT hướng dẫn: Lý Bo</SectionTitle></li>
+          {list__KhoaTap.map((item) => (
+            <div class="pricing">
+              <div class="plan popular">
+                <span><SectionTitle key={item._id}>{item.TenKhoaTap}</SectionTitle></span>
+                <SectionTitle><img src="https://www.citigym.com.vn/storage/uploads/rin-1822-375x440.jpg" /></SectionTitle>
+                <div class="price"><SectionTitle><h1
+                  style={{
+                    fontSize: 20,
+                    marginRight: 50,
 
-              </ul>
-              <button><SectionTitle>  <EditIcon className="w-5 h-5" aria-hidden="true" />Chỉnh sửa</SectionTitle></button>
+                  }}
+                >$10</h1></SectionTitle></div>
+                <ul class="features">
+                  <li><i class="fas fa-check-circle"></i> <SectionTitle>{item.ThoiGianKhoaTap} tháng</SectionTitle></li>
+                  <li><i class="fas fa-check-circle"></i> <SectionTitle>{item.GioBatDau} - {item.GioKetThuc}</SectionTitle></li>
+                  <li><i class="fas fa-check-circle"></i> <SectionTitle>PT hướng dẫn: {item.TenPT}</SectionTitle></li>
+                  <li><i class="fas fa-check-circle"></i> <SectionTitle>Ngày tập: {item.ChonNgayTap.join(", ")}</SectionTitle></li>
+                </ul>
+                <Button>
+                  <SectionTitle>  <EditIcon className="w-5 h-5" aria-hidden="true" />Chỉnh sửa</SectionTitle>
+                  </Button>
+              </div>
             </div>
-          </div>
 
-          <div class="pricing">
-            <div class="plan popular">
-              <span><SectionTitle>Tên khóa tập</SectionTitle></span>
-              <SectionTitle><img src="https://www.citigym.com.vn/storage/uploads/rin-1822-375x440.jpg" /></SectionTitle>
-              <div class="price"><SectionTitle><h1
-                style={{
-                  fontSize: 20
-                }}
-              >$10</h1></SectionTitle></div>
-              <ul class="features">
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>2 tháng</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>8:00 - 10:00</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>PT hướng dẫn: Lý Bo</SectionTitle></li>
+          ))}
 
-              </ul>
-              <button><SectionTitle>  <EditIcon className="w-5 h-5" aria-hidden="true" />Chỉnh sửa</SectionTitle></button>
-            </div>
-          </div>
 
-          <div class="pricing">
-            <div class="plan popular">
-              <span><SectionTitle>Tên khóa tập</SectionTitle></span>
-              <SectionTitle><img src="https://www.citigym.com.vn/storage/uploads/rin-1822-375x440.jpg" /></SectionTitle>
-              <div class="price"><SectionTitle><h1
-                style={{
-                  fontSize: 20
-                }}
-              >$10</h1></SectionTitle></div>
-              <ul class="features">
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>2 tháng</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>8:00 - 10:00</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>PT hướng dẫn: Lý Bo</SectionTitle></li>
-
-              </ul>
-              <button><SectionTitle>  <EditIcon className="w-5 h-5" aria-hidden="true" />Chỉnh sửa</SectionTitle></button>
-            </div>
-          </div>
-          <div class="pricing">
-            <div class="plan popular">
-              <span><SectionTitle>Tên khóa tập</SectionTitle></span>
-              <SectionTitle><img src="https://www.citigym.com.vn/storage/uploads/rin-1822-375x440.jpg" /></SectionTitle>
-              <div class="price"><SectionTitle><h1
-                style={{
-                  fontSize: 20
-                }}
-              >$10</h1></SectionTitle></div>
-              <ul class="features">
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>2 tháng</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>8:00 - 10:00</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>PT hướng dẫn: Lý Bo</SectionTitle></li>
-
-              </ul>
-              <button><SectionTitle>  <EditIcon className="w-5 h-5" aria-hidden="true" />Chỉnh sửa</SectionTitle></button>
-            </div>
-          </div>
-
-          <div class="pricing">
-            <div class="plan popular">
-              <span><SectionTitle>Tên khóa tập</SectionTitle></span>
-              <SectionTitle><img src="https://www.citigym.com.vn/storage/uploads/rin-1822-375x440.jpg" /></SectionTitle>
-              <div class="price"><SectionTitle><h1
-                style={{
-                  fontSize: 20
-                }}
-              >$10</h1></SectionTitle></div>
-              <ul class="features">
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>2 tháng</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>8:00 - 10:00</SectionTitle></li>
-                <li><i class="fas fa-check-circle"></i> <SectionTitle>PT hướng dẫn: Lý Bo</SectionTitle></li>
-
-              </ul>
-              <button><SectionTitle>  <EditIcon className="w-5 h-5" aria-hidden="true" />Chỉnh sửa</SectionTitle></button>
-            </div>
-          </div>
-          
         </div>
 
 

@@ -107,10 +107,10 @@ const routes = [
     path: '/listHoaDon',
     component: ListHoaDon,
   },
-  {
-    path: '/detailstintuc',
-    component: DetailsTinTuc,
-  },
+  // {
+  //   path: '/detailstintuc',
+  //   component: DetailsTinTuc,
+  // },
  
     // LIST GYM
 

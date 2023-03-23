@@ -32,15 +32,13 @@ function ListPT() {
   const list__PT = useSelector((state) => state.listPTGYM.list__PT);
   console.log(list__PT);
 
-  // const response2 = list__PT.concat([])
   const dispatch = useDispatch();
- // const list__PT = useSelector(state => state.users);
   useEffect(() => {
     dispatch((actionFetchPTs));
   }, [dispatch]);
   const response2 = list__PT.concat([])
 
-  const [editingClub1, setEditingClub1] = useState(null);
+  // const [editingClub1, setEditingClub1] = useState(null);
   const [editingClub, setEditingClub] = useState(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -105,7 +103,7 @@ function ListPT() {
   }, [pageTable2])
 
 
-  const [clubInfo, setClubInfo] = useState({
+   const [clubInfo, setClubInfo] = useState({
     id: "",
     TenPT: "",
     SoDienThoaiPT: "",

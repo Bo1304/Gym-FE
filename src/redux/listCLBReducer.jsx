@@ -1,5 +1,6 @@
 import { produce } from "immer";
-import * as actionsTypes from "./constants/listCLBcontans";
+//tạo ra một phiên bản mới của đối tượng (object) hoặc mảng (array) mà không làm thay đổi đối tượng hoặc mảng gốc.
+//Immer sẽ tạo ra một pb mới của đối tượng gốc dựa trên các thay đổi mà chúng ta đã thực hiện trên đối tượng "draft".
 import { createStore } from 'redux';
 import {
   DELETE_GYM_CLB_LIST_PENDING , UPDATE_GYM_CLB_LIST_PENDING
