@@ -3,12 +3,12 @@ import {https,https_pt} from "./config.jsx";
 
 export const gYMServices = {
   getlistCLB() {
-    const url = '/API-GYM';
+    const url = '/api/caulacbos';
     return https.get(url);
   },
 
-  deleteListCLB(id){
-    const url = `${id}`;
+  deleteListCLB(_id){
+    const url = `/api/caulacbos/${_id}`;
     return https.delete(url);
 },
   getListPT(){

@@ -22,7 +22,7 @@ import response from '../utils/demo/tableData'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionFetchTinTucs, getItemFromNextPageAfterDeleteTinTuc } from '../redux/actions/listTinTucAction'
 import { UPDATE_GYM_TINTUC_LIST_PENDING } from '../redux/constants/listTinTucconstans'
-import { useHistory, Route, Switch, NavLink } from "react-router-dom";
+import { useHistory, Route, Switch, NavLink, useLocation } from "react-router-dom";
 import DetailsTinTuc from '../pages/DetailsTinTuc'
 
 // make a copy of the data, for the second table
@@ -44,19 +44,19 @@ function ListTinTuc() {
   const history = useHistory();
   //Tạo một state mới để lưu ID của tin tức được chọn để chỉnh sửa
   const [selectedId, setSelectedId] = useState(null)
+  const location = useLocation();
+  const [selectedTinTuc, setSelectedTinTuc] = useState(null);
 
   //lưu ID của tin tức được chọn vào state selectedId và chuyển sang trang DetailsTinTuc
   const handleEdit = (_id) => {
-    setSelectedId(_id);
-    history.push(`/detailstintuc/${_id}`);
+    const tinTuc = dataTable1.find((item) => item._id === _id);
+    console.log(tinTuc);
+    setSelectedTinTuc(tinTuc);
+    history.push({
+      pathname: `/listTinTuc/detailstintuc/${_id}`,
+      state: { tinTuc },
+    });
   }
-  /**
-   * DISCLAIMER: This code could be badly improved, but for the sake of the example
-   * and readability, all the logic for both table are here.
-   * You would be better served by dividing each table in its own
-   * component, like Table(?) and TableWithActions(?) hiding the
-   * presentation details away from the page view.
-   */
 
   // setup pages control for every table
   const [pageTable1, setPageTable1] = useState(1)
@@ -87,7 +87,6 @@ function ListTinTuc() {
     setPageTable2(p)
     setCurrentPage(p.selected + 1);
   }
-
 
   // on page change, load new sliced data
   // here you would make another server request for new data
@@ -164,7 +163,7 @@ function ListTinTuc() {
                 onClick={() => handleEdit(News._id)}
                 >
                       <EditIcon className="w-5 h-5" aria-hidden="true" />
-                      Edit
+                      
                     </Button>
                   {/* <NavLink to={`/detailstintuc/${News._id}`}>
                     <Button size="small" tag="a">

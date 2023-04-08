@@ -16,10 +16,10 @@ import { UPDATE_GYM_CLB_LIST_PENDING } from '../redux/constants/listCLBcontans';
 
 
 const FormCLB = () => {
-  const [cLBName, setNameCLB] = useState('');
-  const [addressCLB, setAddressCLB] = useState('');
-  const [phoneNumberCLB, setPhoneCLB] = useState('');
-  const [imageCLB, setFileImageCLB] = useState('');
+  const [TenCauLacBo, setTenCauLacBo] = useState('');
+  const [DiaChiCLB, setDiaChiCLB] = useState('');
+  const [SoDienThoaiCLB, setSoDienThoaiCLB] = useState('');
+  const [ImageCLB, setImageCLB] = useState('');
 
 
 
@@ -27,14 +27,14 @@ const FormCLB = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const product = { cLBName, addressCLB, phoneNumberCLB, imageCLB };
+    const product = { TenCauLacBo, DiaChiCLB, SoDienThoaiCLB, ImageCLB };
     // Sử dụng hàm dispatch để gọi hàm addFormCLB và truyền vào đối tượng product.
     //  Hàm addFormCLB sẽ thêm đối tượng product vào cơ sở dữ liệu.
     await dispatch(addFormCLB(product));
-    setNameCLB('');
-    setAddressCLB('');
-    setPhoneCLB('');
-    setFileImageCLB('');
+    setTenCauLacBo('');
+    setDiaChiCLB('');
+    setSoDienThoaiCLB('');
+    setImageCLB('');
     const reponseRender = await gYMServices.getlistCLB();
     dispatch({
       type: UPDATE_GYM_CLB_LIST_PENDING,
@@ -60,9 +60,9 @@ const FormCLB = () => {
         >
           <Label className="mb-4">
             <span>Tên câu lạc bộ</span>
-            <Input className="mt-1" id="cLBName" name="cLBName" placeholder="Nhập tên CLB"
-              value={cLBName}
-              onChange={(e) => setNameCLB(e.target.value)}
+            <Input className="mt-1" id="TenCauLacBo" name="TenCauLacBo" placeholder="Nhập tên CLB"
+              value={TenCauLacBo}
+              onChange={(e) => setTenCauLacBo(e.target.value)}
             />
           </Label>
 
@@ -70,23 +70,23 @@ const FormCLB = () => {
             <span>Địa chỉ</span>
             <Input className="mt-1" id="addressCLB"
               name="AddressCLB"
-              value={addressCLB}
-              onChange={(e) => setAddressCLB(e.target.value)}
+              value={DiaChiCLB}
+              onChange={(e) => setDiaChiCLB(e.target.value)}
               placeholder="Nhập địa chỉ" />
           </Label>
           <Label className="mb-4">
             <span>Số điện thoại</span>
             <Input className="mt-1" type="tel" id="phoneNumberCLB" name="phoneNumberCLB"
-              value={phoneNumberCLB}
-              onChange={(e) => setPhoneCLB(e.target.value)}
+              value={SoDienThoaiCLB}
+              onChange={(e) => setSoDienThoaiCLB(e.target.value)}
               placeholder="Nhập SĐT" />
           </Label>
 
           <Label className="mb-4">
             <span>Image</span>
             <Input id="imageCLB" name="imageCLB"
-              value={imageCLB}
-              onChange={(e) => setFileImageCLB(e.target.value)}
+              value={ImageCLB}
+              onChange={(e) => setImageCLB(e.target.value)}
             />
           </Label>
         </div>

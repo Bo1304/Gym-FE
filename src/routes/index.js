@@ -23,6 +23,15 @@ const Page404 = lazy(() => import('../pages/404'))
 const Blank = lazy(() => import('../pages/Blank'))
 const DetailsTinTuc = lazy(() => import('../pages/DetailsTinTuc'))
 
+function requireAuth(to, from, next) {
+  const isLoggedIn = localStorage.getItem('User-GYM');
+  if (isLoggedIn) {
+    next();
+  } else {
+    next('/login');
+  }
+}
+
 /**
  * ⚠ These are internal routes!
  * They will be rendered inside the app, using the default `containers/Layout`.
@@ -37,6 +46,7 @@ const routes = [
   {
     path: '/dashboard', // the url
     component: Dashboard, // view rendered
+    
   },
   {
     path: '/forms',
@@ -73,6 +83,7 @@ const routes = [
   {
     path: '/formCLB',
     component: FormCLB,
+   
   },
   {
     path: '/formPT',
@@ -107,10 +118,10 @@ const routes = [
     path: '/listHoaDon',
     component: ListHoaDon,
   },
-  // {
-  //   path: '/detailstintuc',
-  //   component: DetailsTinTuc,
-  // },
+  {
+    path: '/detailstintuc',
+    component: DetailsTinTuc,
+  },
  
     // LIST GYM
 

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import useRequest, { response } from "../CustomHooks/useRequest";
 
 import PageTitle from '../components/Typography/PageTitle'
 import SectionTitle from '../components/Typography/SectionTitle'
+
 import CTA from '../components/CTA'
 import {
   Table,
@@ -15,21 +19,50 @@ import {
   Avatar,
   Button,
   Pagination,
+  Modal, ModalHeader, ModalFooter,
+  ModalBody, Label, Input,
 } from '@windmill/react-ui'
 import { EditIcon, TrashIcon } from '../icons'
-
-import response from '../utils/demo/tableData'
-// make a copy of the data, for the second table
-const response2 = response.concat([])
+import ReactPaginate from 'react-paginate';
+import { actionFetchHoaDons } from '../redux/actions/UserAction/ListHoaDonAction';
+import { UPDATE_GYM_PT_LIST_PENDING } from '../redux/constants/listPTconstans'
+import { gYMServices } from '../Service/gYMServices';
+import { useHistory } from 'react-router-dom';
 
 function ListHoaDon() {
-  /**
-   * DISCLAIMER: This code could be badly improved, but for the sake of the example
-   * and readability, all the logic for both table are here.
-   * You would be better served by dividing each table in its own
-   * component, like Table(?) and TableWithActions(?) hiding the
-   * presentation details away from the page view.
-   */
+  const list__HOADON = useSelector((state) => state.listHOADONGYM.list__HOADON);
+  console.log(list__HOADON);
+  const history = useHistory();
+  const [selectedDetailsHoaDon, setselectedDetailsHoaDon] = useState(null);
+
+  const detailsHD = (_id) => {
+    const detailsHoaDon = dataTable1.find((item) => item._id === _id);
+    console.log(detailsHoaDon);
+    setselectedDetailsHoaDon(detailsHoaDon);
+    history.push({
+      pathname: `/details-hoadon/${_id}`,
+      state: { detailsHoaDon },
+    });
+  }
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch((actionFetchHoaDons));
+  }, [dispatch]);
+  const response2 = list__HOADON.concat([])
+
+  const [editingClub, setEditingClub] = useState(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  function openModal(club) {
+    setIsModalOpen(true);
+    setEditingClub(club);
+  }
+  function closeModal() {
+    setIsModalOpen(false);
+    setEditingClub(null);
+  }
+
 
   // setup pages control for every table
   const [pageTable1, setPageTable1] = useState(1)
@@ -40,92 +73,209 @@ function ListHoaDon() {
   const [dataTable2, setDataTable2] = useState([])
 
   // pagination setup
-  const resultsPerPage = 10
-  const totalResults = response.length
+  const resultsPerPage = 3
+  const totalResults = list__HOADON.length
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    // call API here
+  }, [currentPage]);
 
   // pagination change control
   function onPageChangeTable1(p) {
     setPageTable1(p)
+    setCurrentPage(p.selected + 1);
   }
 
   // pagination change control
   function onPageChangeTable2(p) {
     setPageTable2(p)
+    setCurrentPage(p.selected + 1);
   }
 
-  // on page change, load new sliced data
-  // here you would make another server request for new data
-  useEffect(() => {
-    setDataTable1(response.slice((pageTable1 - 1) * resultsPerPage, pageTable1 * resultsPerPage))
-  }, [pageTable1])
 
-  // on page change, load new sliced data
-  // here you would make another server request for new data
+
+  useEffect(() => {
+    setDataTable1(list__HOADON.slice((pageTable1 - 1) * resultsPerPage, pageTable1 * resultsPerPage))
+  }, [pageTable1, list__HOADON])
+
+
   useEffect(() => {
     setDataTable2(response2.slice((pageTable2 - 1) * resultsPerPage, pageTable2 * resultsPerPage))
   }, [pageTable2])
 
+
   return (
     <>
-     
-     <SectionTitle>Table with actions</SectionTitle>
+      <PageTitle>Danh Sách Hóa Đơn</PageTitle>
+
+      <CTA />
+
+      <SectionTitle>Simple table</SectionTitle>
       <TableContainer className="mb-8">
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>Họ tên</TableCell>
-              <TableCell>Giá tiền</TableCell>
+              <TableCell>Tên học viên</TableCell>
+              <TableCell>Ngày tạo</TableCell>
               <TableCell>Trạng thái</TableCell>
-              <TableCell>Ngày</TableCell>
-              <TableCell></TableCell>
+              <TableCell>Tổng tiền</TableCell>
+              <TableCell>Email</TableCell>
+
+              <TableCell>Tùy chọn</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
-            {dataTable2.map((user, i) => (
-              <TableRow key={i}>
+            {dataTable1.map((itemhoadon) => (
+              <TableRow >
                 <TableCell>
                   <div className="flex items-center text-sm">
                     {/* <Avatar className="hidden mr-3 md:block" src={user.avatar} alt="User avatar" /> */}
-                    {/* // chỗ để set img avatar */}
                     <div>
-                      <p className="font-semibold">{user.name}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">{user.job}</p>
+                      <p className="font-semibold">{itemhoadon.idHocVien.HoTenHocVien}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400" id={itemhoadon._id}>
+                        {itemhoadon.idHocVien.GioiTinhHocVien === 1 ? "Nam" : "Nữ"}
+                      </p>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">$ {user.amount}</span>
+                  <p className="font-semibold">{new Date(itemhoadon.ngayTao).toLocaleDateString("be-BY").split('/').reverse().join('/')}</p>
+
+
                 </TableCell>
                 <TableCell>
-                  <Badge type={user.status}>{user.status}</Badge>
+                  {/* <span className="text-sm">{item.imageCLB}</span> */}
+                  <Badge className="text-sm"> {itemhoadon.trangThai}</Badge>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span>
+                  {/* <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span> */}
+                  <span className="text-sm">
+                    {itemhoadon.tongTien.toLocaleString('vi-VN',
+                      {
+                        style: 'currency', currency: 'VND'
+                      }
+                    )}
+                  </span>
+                </TableCell>
+
+                <TableCell>
+                  <span className="text-sm">{itemhoadon.idHocVien.EmailHocVien}</span>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center space-x-4">
-                    <Button layout="link" size="icon" aria-label="Edit">
-                      <EditIcon className="w-5 h-5" aria-hidden="true" />
-                    </Button>
-                      {/* <Button layout="link" size="icon" aria-label="Delete">
-                        <TrashIcon className="w-5 h-5" aria-hidden="true" />
-                      </Button> */}
-                  </div>
+                  {/* Nút sửa */}
+
+                  <Button
+                    layout="link" size="icon" aria-label="Edit"
+                    // onClick={openModal}
+                    // onClick={() => openModal(itemhoadon)}
+                    onClick={() => detailsHD(itemhoadon._id)}
+                  >
+                    <EditIcon className="w-5 h-5" aria-hidden="true" />
+
+                  </Button>
+                  {/* <div>
+                    <Button onClick={openModal}>Open modal</Button>
+                  </div> */}
+                  {/* <Modal isOpen={isModalOpen} onClose={closeModal}>
+                    <ModalHeader>Sửa thông tin CLB</ModalHeader>
+                    <ModalBody>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label>
+                            <span>Tên CLB</span>
+                            <Input
+                              className="mt-1"
+                              value={editingClub?.TenPT}
+                              onChange={(e) =>
+                                setEditingClub({
+                                  ...editingClub,
+                                  TenPT: e.target.value,
+                                })
+                              }
+                            />
+                          </Label>
+                          <Label>
+                            <span>Địa chỉ</span>
+                            <Input
+                              className="mt-1"
+                              value={editingClub?.SoDienThoaiPT}
+                              onChange={(e) =>
+                                setEditingClub({
+                                  ...editingClub,
+                                  SoDienThoaiPT: e.target.value,
+                                })
+                              }
+                            />
+                          </Label>
+                        </div>
+                        <div>
+                          <Label>
+                            <span>Số điện thoại</span>
+                            <Input
+                              className="mt-1"
+                              value={editingClub?.EmailPT}
+                              onChange={(e) =>
+                                setEditingClub({
+                                  ...editingClub,
+                                  EmailPT: e.target.value,
+                                })
+                              }
+                            />
+                          </Label>
+                          <Label>
+                            <span>Hình ảnh</span>
+                            <Input
+                              className="mt-1"
+                              value={editingClub?.ImagePT}
+                              onChange={(e) =>
+                                setEditingClub({
+                                  ...editingClub,
+                                  ImagePT: e.target.value,
+                                })
+                              }
+                            />
+                          </Label>
+                        </div>
+                      </div>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        layout="outline"
+                        onClick={() => {
+                          closeModal();
+                          // setClubInfo({
+                          //   id: "",
+                          //   cLBName: "",
+                          //   cLBImage: "",
+                          //   cLBAddress: "",
+                          //   cLBPhone: "",
+                          // });
+                        }}
+                      >
+                        Hủy
+                      </Button>
+                      <Button
+                      //  onClick={() => handleUpdateCLB(editingClub._id)}
+                      >
+                        Cập nhật
+                      </Button>
+                    </ModalFooter>
+                  </Modal> */}
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        <TableFooter>
-          <Pagination
-            totalResults={totalResults}
-            resultsPerPage={resultsPerPage}
-            onChange={onPageChangeTable2}
-            label="Table navigation"
-          />
-        </TableFooter>
+
+        <Pagination
+          totalResults={totalResults}
+          resultsPerPage={resultsPerPage}
+          onChange={onPageChangeTable1}
+          label="Table navigation"
+        />
       </TableContainer>
-     
     </>
   )
 }

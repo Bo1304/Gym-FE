@@ -5,6 +5,14 @@
  * If you're looking to actual Router routes, go to
  * `routes/index.js`
  */
+// function requireAuth(to, from, next) {
+//   const isLoggedIn = localStorage.getItem('User-GYM');
+//   if (isLoggedIn) {
+//     next();
+//   } else {
+//     next('/login');
+//   }
+// }
 const routes = [
   {
     path: '/app/dashboard', // the url
@@ -45,6 +53,7 @@ const routes = [
     path: '/app/formKhoaTap',
     icon: 'ButtonsIcon',
     name: 'Khóa Tập',
+    
   },
   {
     path: '/app/formTinTuc',

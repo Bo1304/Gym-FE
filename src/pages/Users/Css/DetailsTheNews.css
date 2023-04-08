@@ -1,0 +1,9 @@
+.ContentTheNews img{
+ display:block !important;
+ text-align: center !important;
+ margin: 0 !important;
+ margin-left: 200px !important;
+}
+body{
+    background-color: white !important;
+}

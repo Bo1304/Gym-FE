@@ -59,20 +59,11 @@ function ListCLB() {
   }
 
   
-
-
-
   // lấy data api xuống từ store
   const list__CLB = useSelector((state) => state.listCLBGYM.list__CLB);
   console.log(list__CLB);
   const dispatch = useDispatch();
-  /**
-   * DISCLAIMER: This code could be badly improved, but for the sake of the example
-   * and readability, all the logic for both table are here.
-   * You would be better served by dividing each table in its own
-   * component, like Table(?) and TableWithActions(?) hiding the
-   * presentation details away from the page view.
-   */
+
 
   const response2 = list__CLB.concat([])
 //   // setup pages control for every table
@@ -93,37 +84,35 @@ function ListCLB() {
     // call API here
   }, [currentPage]);
 
-  // pagination change control
+  
   function onPageChangeTable1(p) {
     setPageTable1(p)
     setCurrentPage(p.selected + 1);
   }
 
-  // pagination change control
+ 
   function onPageChangeTable2(p) {
     setPageTable2(p)
     setCurrentPage(p.selected + 1);
   }
  
 
-  // on page change, load new sliced data
-  // here you would make another server request for new data
+ 
   useEffect(() => {
     setDataTable1(list__CLB.slice((pageTable1 - 1) * resultsPerPage, pageTable1 * resultsPerPage))
   }, [pageTable1, list__CLB])
 
-  // // on page change, load new sliced data
-  // // here you would make another server request for new data
+ 
   useEffect(() => {
     setDataTable2(response2.slice((pageTable2 - 1) * resultsPerPage, pageTable2 * resultsPerPage))
   }, [pageTable2])
 
   const [clubInfo, setClubInfo] = useState({
     id: "",
-    cLBName: "",
-    cLBImage: "",
-    cLBAddress: "",
-    cLBPhone: "",
+    TenCauLacBo: "",
+    DiaChiCLB: "",
+    SoDienThoaiCLB: "",
+    ImageCLB: "",
   });
 
   // vấn đề hàm DELETE này đc viết để xử lý vấn đề khi xóa mà nó không render lại giao diện và không cập nhật lại ds khi xóa
@@ -132,12 +121,12 @@ function ListCLB() {
   // bằng cách lọc bỏ item đã xóa khỏi danh sách cũ và gán danh sách mới này vào state bằng setDataTable1(newList).
   // Sau đó, hàm này cũng gửi một request axios.get tới server API để lấy danh sách mới từ server 
   // và cập nhật lại state bằng cách gọi hàm dispatch({ type: UPDATE_GYM_CLB_LIST_PENDING, payload: response2.data });.
-  const handleDeletee = async (id) => {
+  const handleDeletee = async (_id) => {
     try {
       // xóa item từ API
-      await gYMServices.deleteListCLB(id);
+      await gYMServices.deleteListCLB(_id);
       // xóa item từ list__CLB state
-      const newList = dataTable1.filter((item) => item.id !== id);
+      const newList = dataTable1.filter((item) => item._id !== _id);
       setDataTable1(newList);
       // lưu mới list__CLB state
      // và thay đổi, re-render
@@ -152,15 +141,12 @@ function ListCLB() {
   const handleUpdateCLB = async (id_CLB) => {
     try {
       const res = await axios.put(
-        `https://63e70c7bb85592e9c949972a.mockapi.io/API-GYM/${id_CLB}`,
+        `http://localhost:3002/api/caulacbos/${id_CLB}`,
         editingClub
       );
       const response2 = await gYMServices.getlistCLB();
       dispatch({ type: UPDATE_GYM_CLB_LIST_PENDING, payload: response2.data });
-      // dispatch({
-      //   type: "UPDATE_GYM_CLB_LIST_PENDING",
-      //   payload: res.data,
-      // });
+    
   
       closeModal();
     } catch (error) {
@@ -193,22 +179,22 @@ function ListCLB() {
                   <div className="flex items-center text-sm">
                     {/* <Avatar className="hidden mr-3 md:block" src={user.avatar} alt="User avatar" /> */}
                     <div>
-                      <p className="font-semibold">{item.cLBName}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400" id={item.id} >{item.cLBName}</p>
+                      <p className="font-semibold">{item.TenCauLacBo}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400" id={item.id} >{item.TenCauLacBo}</p>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <img className=' w-40 mr-3' src={item.imageCLB} alt="" />
+                  <img className=' w-40 mr-3' src={item.ImageCLB} alt="" />
 
                 </TableCell>
                 <TableCell>
                   {/* <span className="text-sm">{item.imageCLB}</span> */}
-                  <span className="text-sm"> {item.addressCLB}</span>
+                  <span className="text-sm"> {item.DiaChiCLB}</span>
                 </TableCell>
                 <TableCell>
                   {/* <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span> */}
-                  <span className="text-sm">{item.phoneNumberCLB}</span>
+                  <span className="text-sm">{item.SoDienThoaiCLB}</span>
                 </TableCell>
                 <TableCell>
                   {/* <span className="text-sm">{user.job}</span> */}
@@ -236,11 +222,11 @@ function ListCLB() {
                             <span>Tên CLB</span>
                             <Input
                               className="mt-1"
-                              value={editingClub?.cLBName}
+                              value={editingClub?.TenCauLacBo}
                               onChange={(e) =>
                                 setEditingClub({
                                   ...editingClub,
-                                  cLBName: e.target.value,
+                                  TenCauLacBo: e.target.value,
                                 })
                               }
                             />
@@ -249,11 +235,11 @@ function ListCLB() {
                             <span>Địa chỉ</span>
                             <Input
                               className="mt-1"
-                              value={editingClub?.addressCLB}
+                              value={editingClub?.DiaChiCLB}
                               onChange={(e) =>
                                 setEditingClub({
                                   ...editingClub,
-                                  addressCLB: e.target.value,
+                                  DiaChiCLB: e.target.value,
                                 })
                               }
                             />
@@ -264,11 +250,11 @@ function ListCLB() {
                             <span>Số điện thoại</span>
                             <Input
                               className="mt-1"
-                              value={editingClub?.phoneNumberCLB}
+                              value={editingClub?.SoDienThoaiCLB}
                               onChange={(e) =>
                                 setEditingClub({
                                   ...editingClub,
-                                  phoneNumberCLB: e.target.value,
+                                  SoDienThoaiCLB: e.target.value,
                                 })
                               }
                             />
@@ -277,11 +263,11 @@ function ListCLB() {
                             <span>Hình ảnh</span>
                             <Input
                               className="mt-1"
-                              value={editingClub?.imageCLB}
+                              value={editingClub?.ImageCLB}
                               onChange={(e) =>
                                 setEditingClub({
                                   ...editingClub,
-                                  imageCLB: e.target.value,
+                                  ImageCLB: e.target.value,
                                 })
                               }
                             />
@@ -306,7 +292,7 @@ function ListCLB() {
                         Hủy
                       </Button>
                       <Button
-                         onClick={() => handleUpdateCLB(editingClub.id)}
+                         onClick={() => handleUpdateCLB(editingClub._id)}
                       >
                         Cập nhật
                       </Button>
@@ -315,7 +301,7 @@ function ListCLB() {
                   <Button
                   size="icon" aria-label="Delete"
                     layout="link"
-                    onClick={() => handleDeletee(item.id)} >
+                    onClick={() => handleDeletee(item._id)} >
                      <TrashIcon className="w-5 h-5" aria-hidden="true" />                   
                   </Button>
                   

@@ -15,7 +15,7 @@ export const addFormCLB = (itemCLB) => async (dispatch) => {
   try {
     // dispatch({ type: ADD_CLB_REQUEST });
 
-    const res = await axios.post('https://63e70c7bb85592e9c949972a.mockapi.io/API-GYM', itemCLB);
+    const res = await axios.post('http://localhost:3002/api/caulacbos', itemCLB);
 
     dispatch({
       type: ADD_CLB_SUCCESS,

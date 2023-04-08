@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://63e70c7bb85592e9c949972a.mockapi.io"; // clb
+const BASE_URL = "http://localhost:3002"; // clb
 
  const BASE_URL_PT = "http://localhost:8080"; // PT
 

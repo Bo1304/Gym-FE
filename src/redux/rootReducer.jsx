@@ -8,6 +8,7 @@ import listPTReducer from "./listPTReducer"
 import listHOCVIENReducer from "./listHocVienReducer"
 import listTINTUCReducer from "./listTinTucReducer"
 import listKHOATAPReducer from "./listKhoaTapReducer"
+import listHoaDonReducer from "./listHoaDonReducer"
 // export { rootReducer };
 // ES6 object literal
 export const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
   listPTGYM: listPTReducer,
   listHOCVIENGYM: listHOCVIENReducer,
   listTINTUCGYM: listTINTUCReducer,
-  listKHOATAPGYM: listKHOATAPReducer
+  listKHOATAPGYM: listKHOATAPReducer,
+  listHOADONGYM: listHoaDonReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

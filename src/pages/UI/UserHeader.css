@@ -1,0 +1,45 @@
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: white !important;
+    margin-top: 0;
+    transition: all 1.2s ease 0s;
+    margin-top:0px;
+    padding-bottom: 20px;
+    margin-left: -16px;
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 5%);
+  }
+  
+  /* .container-fluid{
+    position: fixed;
+  } */
+  #ScrollColor a{
+    transition: all 1.2s ease 0s;
+  }
+  .sticky  #ScrollColor{
+    background-color:white!important;
+  
+  }
+  .sticky  #ScrollColor a{
+    color:   rgb(112, 112, 112);
+    margin-bottom: -20px;
+    transition: all 1.2s ease 0s;
+  }
+  .sticky  #ScrollColor a:hover{
+    color: rgb(255, 17, 17);
+    transition: all .2s ease 0s;
+  }
+  .sticky  #ScrollColor  .text-gray-900{
+    transition: all 1.2s ease 0s;
+    color: black;
+  }
+  .collapse .navbar-collapse .justify-content-between .scrollNav {
+    transition: all 0.9s ease 0s;
+    margin-top: -25px;
+  }
+  .sticky .dropdown-menu{
+    margin-top: 35px;
+    line-height: 45px;
+  }

@@ -1,0 +1,180 @@
+/*Import fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@300;400&display=swap");
+/*Global vars*/
+:root {
+  --font-primary: "Fredoka", sans-serif;
+  --font-secondary: "Montserrat", sans-serif;
+  --primary: #7c5ef4;
+  --primary-darker: #624ac1;
+  --primary-lighten: #9278fd;
+  --secondary: #1f213a;
+  --dark-secondary: #141625;
+  --light-secondary: #625b9e;
+  --light: #fffeff;
+  --sent-rgb: 64, 198, 165;
+  --pending-rgb: 232, 148, 42;
+}
+
+/*Global Styles*/
+body {
+  background: var(--dark-secondary);
+  min-height: 100vh;
+  color: var(--light);
+}
+body.light-mode {
+  --dark-secondary: #f8f7fc;
+  --light-secondary: #ccc;
+  --light: #333;
+}
+body.light-mode .invoice-item {
+  background: white;
+}
+
+/*Global Buttons*/
+.btn-primary,
+.btn-primary:focus {
+  background: var(--primary);
+  color: #fffeff;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 1.4rem;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+.btn-primary:hover,
+.btn-primary:focus:hover {
+  border: 0;
+  background: var(--primary-lighten);
+}
+.btn-primary:active, .btn-primary:active:focus,
+.btn-primary:focus:active,
+.btn-primary:focus:active:focus {
+  border: 0;
+  background: var(--primary-darker);
+  box-shadow: none;
+}
+
+.btn-arrow,
+.btn-arrow:focus {
+  color: var(--light-secondary);
+  padding: 0;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+.btn-arrow:hover,
+.btn-arrow:focus:hover {
+  color: var(--light);
+}
+
+/*Sidebar*/
+aside {
+  background: var(--secondary);
+  min-height: 100vh;
+  border-radius: 0 1.5rem 1.5rem 0;
+}
+aside .logo {
+  color: #fffeff;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  border-radius: 0 1.5rem 1.5rem 0;
+  background: linear-gradient(var(--primary) 50%, var(--primary-lighten) 50%);
+}
+aside .switch-light,
+aside .switch-light:focus {
+  color: #fffeff;
+  opacity: 0.7;
+  box-shadow: none;
+}
+aside .switch-light:hover,
+aside .switch-light:focus:hover {
+  color: #fffeff;
+  opacity: 1;
+}
+
+/*Invoice page*/
+.invoice-list-page {
+  padding: 3rem 0;
+  width: 100%;
+}
+.invoice-list-page__header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-family: var(--font-primary);
+  margin-bottom: 10px;
+}
+.invoice-list-page__header .detail {
+  font-size: clamp(0.8rem, 4vw, 1rem);
+  font-family: var(--font-secondary);
+  opacity: 0.7;
+}
+.invoice-list-page__content {
+  padding: 2rem 0;
+}
+.invoice-list-page__content .invoice-item {
+  background: var(--secondary);
+  padding: 1.5rem 2rem;
+  margin: 1rem 0;
+  border-radius: 0.4rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.05);
+}
+.invoice-list-page__content .invoice-item .id {
+  font-family: var(--font-primary);
+  color: var(--light-secondary);
+}
+.invoice-list-page__content .invoice-item .id span {
+  font-weight: 600;
+  color: var(--light);
+}
+.invoice-list-page__content .invoice-item .date,
+.invoice-list-page__content .invoice-item .company {
+  font-family: var(--font-secondary);
+  opacity: 0.8;
+}
+.invoice-list-page__content .invoice-item .amount {
+  font-family: var(--font-primary);
+  color: var(--light);
+  font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+.invoice-list-page__content .invoice-item .status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.4rem;
+  color: var(--light);
+  font-family: var(--font-primary);
+  font-weight: 600;
+  background: var(--dark-secondary);
+  font-size: clamp(0.8rem, 2vw, 0.8rem);
+}
+.invoice-list-page__content .invoice-item .status:before {
+  content: "";
+  border-radius: 100%;
+  display: inline-flex;
+  background: var(--light);
+  width: 0.3rem;
+  height: 0.3rem;
+  margin-right: 0.5rem;
+}
+.invoice-list-page__content .invoice-item .status--sent {
+  background: rgb(var(--sent-rgb), 0.2);
+  color: rgb(var(--sent-rgb), 1);
+}
+.invoice-list-page__content .invoice-item .status--sent:before {
+  background: rgb(var(--sent-rgb), 1);
+}
+.invoice-list-page__content .invoice-item .status--pending {
+  background: rgb(var(--pending-rgb), 0.2);
+  color: rgb(var(--pending-rgb), 1);
+}
+.invoice-list-page__content .invoice-item .status--pending:before {
+  background: rgb(var(--pending-rgb), 1);
+}

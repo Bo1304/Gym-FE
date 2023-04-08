@@ -18,9 +18,6 @@ const reducer = (state = initialState, action) => {
       draft.list__KhoaTap = action.payload;
     }
  
-    
-      
-
   });
 };
 

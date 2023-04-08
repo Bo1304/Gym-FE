@@ -11,6 +11,7 @@ import {
   OutlineLogoutIcon,
 } from '../icons'
 import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui'
+import { useHistory } from 'react-router-dom';
 
 function Header() {
   const { mode, toggleMode } = useContext(WindmillContext)
@@ -25,6 +26,11 @@ function Header() {
 
   function handleProfileClick() {
     setIsProfileMenuOpen(!isProfileMenuOpen)
+  }
+  const history = useHistory();
+  function handleLogout() {
+    localStorage.removeItem('Admin-GYM');
+    history.push('/admin');
   }
 
   return (
@@ -128,10 +134,11 @@ function Header() {
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Settings</span>
               </DropdownItem>
-              <DropdownItem onClick={() => alert('Log out!')}>
+              <DropdownItem onClick={handleLogout}>
                 <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Log out</span>
               </DropdownItem>
+
             </Dropdown>
           </li>
         </ul>
