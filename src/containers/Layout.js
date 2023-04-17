@@ -62,5 +62,4 @@ const [user, setUser] = useState(null);
     </div>
   )
 }
-
 export default Layout

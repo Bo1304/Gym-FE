@@ -8,7 +8,6 @@ import UserFooter from "../UI/UserFooter";
 import carousel1 from "../../assets/libUser/img/carousel-1.jpg";
 import carousel2 from "../../assets/libUser/img/carousel-2.jpg";
 import './Css/CartGymm.css'
-
 import { Helmet } from 'react-helmet';
 import axios from "axios";
 import Swal from 'sweetalert2';

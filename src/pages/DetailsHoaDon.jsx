@@ -159,8 +159,6 @@ function DetailsHoaDon() {
                                                                     </Badge>
                                                                 )}
 
-
-
                                                                 {/* <span class="status status--sent">{itemdetailHD.idHoaDon.idHocVien}</span>
                                                                 <span class="status status--sent">{itemdetailHD.idKhoaTap._id}</span> */}
                                                             </div>

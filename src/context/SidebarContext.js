@@ -13,7 +13,6 @@ export const SidebarProvider = ({ children }) => {
   function closeSidebar() {
     setIsSidebarOpen(false)
   }
-
   const value = useMemo(
     () => ({
       isSidebarOpen,

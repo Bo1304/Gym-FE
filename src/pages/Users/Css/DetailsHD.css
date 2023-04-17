@@ -68,7 +68,6 @@ body.light-mode .invoice-item {
 .btn-arrow:focus:hover {
   color: var(--light);
 }
-
 /*Sidebar*/
 aside {
   background: var(--secondary);

@@ -143,7 +143,6 @@ function ListHoaDon() {
                 <TableCell>
                   <p className="font-semibold">{new Date(itemhoadon.ngayTao).toLocaleDateString("be-BY").split('/').reverse().join('/')}</p>
 
-
                 </TableCell>
                 <TableCell>
                   {/* <span className="text-sm">{item.imageCLB}</span> */}

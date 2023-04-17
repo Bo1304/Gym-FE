@@ -37,8 +37,6 @@ const routes = [
     name: 'PT',
   },
 
-
-
   // LIST GYM
 
   {
