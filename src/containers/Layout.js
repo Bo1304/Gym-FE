@@ -1,5 +1,5 @@
 import React, { useContext, Suspense, useEffect, lazy } from 'react'
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
+import { Switch, Route, Redirect, useLocation, useHistory } from 'react-router-dom'
 import routes from '../routes'
 
 import Sidebar from '../components/Sidebar'
@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import Main from '../containers/Main'
 import ThemedSuspense from '../components/ThemedSuspense'
 import { SidebarContext } from '../context/SidebarContext'
+import { useState } from 'react'
 
 const Page404 = lazy(() => import('../pages/404'))
 
@@ -17,6 +18,19 @@ function Layout() {
   useEffect(() => {
     closeSidebar()
   }, [location])
+
+const history = useHistory();
+const [user, setUser] = useState(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('Admin-GYM'));
+    if (user) {
+      setUser(user);
+    }
+    else{
+      history.push('/admin');
+    }
+
+  }, [history]);
 
   return (
     <div

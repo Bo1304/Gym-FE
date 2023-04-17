@@ -42,12 +42,12 @@ function SidebarContent() {
         )}
       </ul>
       <div className="px-6 my-6">
-        <Button>
+        {/* <Button>
           Create account
           <span className="ml-2" aria-hidden="true">
             +
           </span>
-        </Button>
+        </Button> */}
       </div>
     </div>
   )

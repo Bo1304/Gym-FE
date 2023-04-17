@@ -128,8 +128,7 @@ function DetailsTinTuc() {
                         onChange={(e) => setImageTinTuc(e.target.value)}
                     />
                 </Label>
-                {/* <SectionTitle>Icons</SectionTitle> */}
-
+              
                 <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                     <Label className="mt-4">
                         <div className="mb-4">

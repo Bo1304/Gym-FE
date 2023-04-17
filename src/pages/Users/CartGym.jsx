@@ -17,13 +17,7 @@ export default function CartGym(props) {
     const [cartUser, setcartUser] = useState(null);
     const history = useHistory();
 
-    // useEffect(() => {
-    //   const cartUser = JSON.parse(localStorage.getItem('Cart-Gym')) || [];
-    //   if (cartUser) {
-    //     setcartUser(cartUser);
-    //   }
-
-    // }, [history]);
+    
     const [subtotal, setSubtotal] = useState(0);
     useEffect(() => {
         const cartUser = JSON.parse(localStorage.getItem('Cart-Gym')) || [];

@@ -147,7 +147,13 @@ function ListHoaDon() {
                 </TableCell>
                 <TableCell>
                   {/* <span className="text-sm">{item.imageCLB}</span> */}
-                  <Badge className="text-sm"> {itemhoadon.trangThai}</Badge>
+                  {itemhoadon.trangThai === "Đã thanh toán" ? (
+                    <Badge className="text-sm">{itemhoadon.trangThai}</Badge>
+                  ) : (
+                    <Badge type="danger" className="text-sm ">
+                      {itemhoadon.trangThai}
+                    </Badge>
+                  )}
                 </TableCell>
                 <TableCell>
                   {/* <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span> */}
@@ -175,94 +181,7 @@ function ListHoaDon() {
                     <EditIcon className="w-5 h-5" aria-hidden="true" />
 
                   </Button>
-                  {/* <div>
-                    <Button onClick={openModal}>Open modal</Button>
-                  </div> */}
-                  {/* <Modal isOpen={isModalOpen} onClose={closeModal}>
-                    <ModalHeader>Sửa thông tin CLB</ModalHeader>
-                    <ModalBody>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label>
-                            <span>Tên CLB</span>
-                            <Input
-                              className="mt-1"
-                              value={editingClub?.TenPT}
-                              onChange={(e) =>
-                                setEditingClub({
-                                  ...editingClub,
-                                  TenPT: e.target.value,
-                                })
-                              }
-                            />
-                          </Label>
-                          <Label>
-                            <span>Địa chỉ</span>
-                            <Input
-                              className="mt-1"
-                              value={editingClub?.SoDienThoaiPT}
-                              onChange={(e) =>
-                                setEditingClub({
-                                  ...editingClub,
-                                  SoDienThoaiPT: e.target.value,
-                                })
-                              }
-                            />
-                          </Label>
-                        </div>
-                        <div>
-                          <Label>
-                            <span>Số điện thoại</span>
-                            <Input
-                              className="mt-1"
-                              value={editingClub?.EmailPT}
-                              onChange={(e) =>
-                                setEditingClub({
-                                  ...editingClub,
-                                  EmailPT: e.target.value,
-                                })
-                              }
-                            />
-                          </Label>
-                          <Label>
-                            <span>Hình ảnh</span>
-                            <Input
-                              className="mt-1"
-                              value={editingClub?.ImagePT}
-                              onChange={(e) =>
-                                setEditingClub({
-                                  ...editingClub,
-                                  ImagePT: e.target.value,
-                                })
-                              }
-                            />
-                          </Label>
-                        </div>
-                      </div>
-                    </ModalBody>
-                    <ModalFooter>
-                      <Button
-                        layout="outline"
-                        onClick={() => {
-                          closeModal();
-                          // setClubInfo({
-                          //   id: "",
-                          //   cLBName: "",
-                          //   cLBImage: "",
-                          //   cLBAddress: "",
-                          //   cLBPhone: "",
-                          // });
-                        }}
-                      >
-                        Hủy
-                      </Button>
-                      <Button
-                      //  onClick={() => handleUpdateCLB(editingClub._id)}
-                      >
-                        Cập nhật
-                      </Button>
-                    </ModalFooter>
-                  </Modal> */}
+
                 </TableCell>
               </TableRow>
             ))}

@@ -58,8 +58,8 @@ function Dashboard() {
   const list__HOADON = useSelector((state) => state.listHOADONGYM.list__HOADON);
   console.log(list__HOADON);
   console.log(list__HOADON.tongTien)
-  
-  
+
+
   const totalTongTien = list__HOADON.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.tongTien;
   }, 0);
@@ -73,7 +73,7 @@ function Dashboard() {
 
   // hocvien
   const list__HOCVIEN = useSelector((state) => state.listHOCVIENGYM.list__HOCVIEN);
-  const [totalClients, setTotalClients] = useState(0); 
+  const [totalClients, setTotalClients] = useState(0);
   useEffect(() => {
     // Thêm useEffect mới để đếm số lượng phần tử trong mảng
     setTotalClients(list__HOCVIEN.length);
@@ -85,7 +85,7 @@ function Dashboard() {
 
   // KhoaTap
   const list__KhoaTap = useSelector((state) => state.listKHOATAPGYM.list__KhoaTap);
-  const [totalKT, setTotalKT] = useState(0); 
+  const [totalKT, setTotalKT] = useState(0);
   useEffect(() => {
     // Thêm useEffect mới để đếm số lượng phần tử trong mảng
     setTotalKT(list__KhoaTap.length);
@@ -96,51 +96,55 @@ function Dashboard() {
   }, [dispatch]);
   return (
     <>
-      
+
       <PageTitle>Dashboard</PageTitle>
 
-<CTA />
+      <CTA />
 
-{/* <!-- Cards --> */}
-<div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-  <InfoCard title="Tổng số học viên" value={totalClients}>
-    <RoundIcon
-      icon={PeopleIcon}
-      iconColorClass="text-orange-500 dark:text-orange-100"
-      bgColorClass="bg-orange-100 dark:bg-orange-500"
-      className="mr-4"
-    />
-  </InfoCard>
+      {/* <!-- Cards --> */}
+      <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+        <InfoCard title="Tổng số học viên" value={totalClients}>
+          <RoundIcon
+            icon={PeopleIcon}
+            iconColorClass="text-orange-500 dark:text-orange-100"
+            bgColorClass="bg-orange-100 dark:bg-orange-500"
+            className="mr-4"
+          />
+        </InfoCard>
 
-  <InfoCard title="Tổng doanh thu" value={` ${totalTongTien}`}>
-    <RoundIcon
-      icon={MoneyIcon}
-      iconColorClass="text-green-500 dark:text-green-100"
-      bgColorClass="bg-green-100 dark:bg-green-500"
-      className="mr-4"
-    />
-  </InfoCard>
+        <InfoCard title="Tổng doanh thu" value={` ${totalTongTien.toLocaleString('vi-VN',
+          {
+            style: 'currency', currency: 'VND'
+          }
+        )} `}>
+          <RoundIcon
+            icon={MoneyIcon}
+            iconColorClass="text-green-500 dark:text-green-100"
+            bgColorClass="bg-green-100 dark:bg-green-500"
+            className="mr-4"
+          />
+        </InfoCard>
 
-  <InfoCard title="Tổng khóa tập" value={totalKT}>
-    <RoundIcon
-      icon={CartIcon}
-      iconColorClass="text-blue-500 dark:text-blue-100"
-      bgColorClass="bg-blue-100 dark:bg-blue-500"
-      className="mr-4"
-    />
-  </InfoCard>
+        <InfoCard title="Tổng khóa tập" value={totalKT}>
+          <RoundIcon
+            icon={CartIcon}
+            iconColorClass="text-blue-500 dark:text-blue-100"
+            bgColorClass="bg-blue-100 dark:bg-blue-500"
+            className="mr-4"
+          />
+        </InfoCard>
 
-  <InfoCard title="Pending contacts" value="">
-    <RoundIcon
-      icon={ChatIcon}
-      iconColorClass="text-teal-500 dark:text-teal-100"
-      bgColorClass="bg-teal-100 dark:bg-teal-500"
-      className="mr-4"
-    />
-  </InfoCard>
-</div>
+        <InfoCard title="Pending contacts" value="">
+          <RoundIcon
+            icon={ChatIcon}
+            iconColorClass="text-teal-500 dark:text-teal-100"
+            bgColorClass="bg-teal-100 dark:bg-teal-500"
+            className="mr-4"
+          />
+        </InfoCard>
+      </div>
 
-     
+
     </>
   )
 }

@@ -5,50 +5,16 @@
  * If you're looking to actual Router routes, go to
  * `routes/index.js`
  */
-// function requireAuth(to, from, next) {
-//   const isLoggedIn = localStorage.getItem('User-GYM');
-//   if (isLoggedIn) {
-//     next();
-//   } else {
-//     next('/login');
-//   }
-// }
+
+
+
 const routes = [
   {
     path: '/app/dashboard', // the url
     icon: 'HomeIcon', // the component being exported from icons/index.js
     name: 'Dashboard', // name that appear in Sidebar
   },
-  // {
-  //   path: '/app/forms',
-  //   icon: 'FormsIcon',
-  //   name: 'Forms',
-  // },
-  // {
-  //   path: '/app/cards',
-  //   icon: 'CardsIcon',
-  //   name: 'Cards',
-  // },
-  // {
-  //   path: '/app/charts',
-  //   icon: 'ChartsIcon',
-  //   name: 'Charts',
-  // },
-  // {
-  //   path: '/app/buttons',
-  //   icon: 'ButtonsIcon',
-  //   name: 'Buttons',
-  // },
-  // {
-  //   path: '/app/modals',
-  //   icon: 'ModalsIcon',
-  //   name: 'Modals',
-  // },
-  // {
-  //   path: '/app/tables',
-  //   icon: 'TablesIcon',
-  //   name: 'Tables',
-  // },
+  
   {
     path: '/app/formKhoaTap',
     icon: 'ButtonsIcon',
